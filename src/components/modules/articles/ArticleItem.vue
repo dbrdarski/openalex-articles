@@ -49,9 +49,9 @@ import { defineProps, ref, inject } from 'vue'
 import Tag from "../../common/Tag.vue"
 import Heart from "../../common/Heart.vue"
 
-const { articles } = inject("localStore")
+const { savedArticles } = inject("localStore")
 const toggleSaved = () => {
-  saved.value ? articles.remove(props.item.id) : articles.add(props.item.id, props.item)
+  saved.value ? savedArticles.remove(props.item.id) : savedArticles.add(props.item.id, props.item)
   saved.value = !saved.value
 }
 
@@ -59,6 +59,6 @@ const props = defineProps({
   item: Object
 })
 
-const saved = ref(articles.has(props.item.id))
+const saved = ref(savedArticles.has(props.item.id))
 
 </script>

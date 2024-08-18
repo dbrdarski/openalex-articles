@@ -7,11 +7,11 @@ const router = createRouter({
   routes: [
     {
       path: '/',
-      name: 'home',
+      name: 'article-search',
       component: HomeView
     },
     {
-      path: '/favorites',
+      path: '/saved-articles',
       name: 'favorites',
       component: FavoritesView
     }

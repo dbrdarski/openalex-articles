@@ -11,16 +11,16 @@
                class="block py-2 px-3 text-white rounded md:bg-transparent md:p-0 dark:text-white hover:"
                aria-current="page"
              >
-               Home
+               Article Search
              </RouterLink>
            </li>
            <li>
              <RouterLink
-               to="/favorites"
+               to="/saved-articles"
                class="block py-2 px-3 text-white rounded md:bg-transparent md:p-0 dark:text-white"
                aria-current="page"
              >
-               Favorites
+               Saved Articles
              </RouterLink>
            </li>
          </ul>
