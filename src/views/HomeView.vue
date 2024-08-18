@@ -3,10 +3,10 @@
     <h2 class="pb-4 text-xl font-semibold">Science Article Search</h2>
     <div class="pb-4 flex gap-4 items-end">
       <Search
+        v-model="search"
         label="Search articles"
         class="max-w-md flex-grow"
         placeholder="Publicaion title, abstract, fulltext..."
-        v-model="search"
       />
       <MaskedDateInput
         v-model="from"
@@ -49,14 +49,13 @@ import MaskedDateInput from "../components/common/MaskedDateInput.vue"
 
 const { searchedArticles } = inject("localStore")
 const articles = ref(searchedArticles.all())
-const search = localStorage.getItem("ArticleSearch")
-const from = ref()
-const to = ref()
+const search = ref(localStorage.getItem("ArticleSearch"))
+const from = ref(localStorage.getItem("ArticleFrom"))
+const to = ref(localStorage.getItem("ArticleTo"))
 
 const createFilters = (filters) => Object.entries(filters)
   .filter(([_, value]) => value)
   .map(([key, value]) => `${key}:${value}`)
-  .join("+")
 
 const fetchArticles = (options) => axios.get(`https://api.openalex.org/works?${new URLSearchParams(options).toString()}`)
 
@@ -66,11 +65,14 @@ const getArticles = async (search = "", filter, { page = 1, perPage = 10 } = {})
     search,
     page,
     "per-page": perPage,
-    ...filter && { filter },
+    ...filter.length && { filter },
   }))?.data?.results
 
   localStorage.setItem("ArticleSearch", search)
+  from.value ? localStorage.setItem("ArticleFrom", from.value) : localStorage.removeItem("ArticleFrom")
+  to.value ? localStorage.setItem("ArticleTo", to.value) : localStorage.removeItem("ArticleTo")
   searchedArticles.drop()
+
   for (const article of results) {
     searchedArticles.save(article)
   }

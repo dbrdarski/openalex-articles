@@ -2,7 +2,7 @@
   <div class="flex items-center rtl:space-x-reverse bg-gray-100 p-4">
     <div class="flex-shrink-0 min-w-6">
       <div
-        title="Save article"
+        :title="saved ? 'Remove article' : 'Save article'"
         class="hover:bg-gray-300 p-2 mr-4 rounded-full cursor-pointer"
         @click="toggleSaved"
       >
