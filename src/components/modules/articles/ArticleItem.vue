@@ -40,6 +40,9 @@
             keyname="display_name"
           />
         </p>
+        <p class="text-sm text-gray-500 truncate">
+          Publication date: <span class="text-black text-xs font-medium">{{ item.publication_date}}</span>
+        </p>
     </div>
   </div>
 </template>
